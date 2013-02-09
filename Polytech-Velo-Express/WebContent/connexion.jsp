@@ -4,7 +4,7 @@
 <p><%= (String)request.getAttribute("erreur") %></p>
 <% } %>
 
-<form method="post" action="#">
+<form method="post" action="connexion">
 	<fieldset>
 		<legend>Connexion</legend>
 		<label>Identifiant<input type="text" name="user"/></label><br/>
