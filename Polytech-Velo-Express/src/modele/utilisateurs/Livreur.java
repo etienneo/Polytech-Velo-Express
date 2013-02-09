@@ -17,12 +17,40 @@ public class Livreur extends Utilisateur {
 		
 		MySQLManager mysql = MySQLManager.getMySQLManager();
 		
-		ResultSet res = mysql.exec("SELECT * FROM Client WHERE login='" + login +"';");
+		ResultSet res = mysql.execRequest("SELECT * FROM Client WHERE login='" + login +"';");
 		
 		try {
 			res.next();
 			idLivreur = res.getInt("idClient");
 			disponibilite = res.getBoolean("disponibilite");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public Livreur(String login, String motDePasse, String nom, String prenom, 
+			String adresse, String ville, String codePostal, String mail, int tel, 
+			boolean disponibilite) {
+		super(login, motDePasse, nom, prenom, adresse, ville, codePostal, mail, tel);
+		this.disponibilite = disponibilite;
+	}
+	
+	/**
+	 * Insère l'utilisateur dans la base de données
+	 */
+	public void insert() {
+		super.insert();
+		
+		int valDispo = (disponibilite) ? 1 : 0;
+		
+		MySQLManager mysql = MySQLManager.getMySQLManager();
+		mysql.execModif("INSERT INTO Livreur (login, disponibilite) " +
+				"VALUES ('" + login + "', '" + valDispo + "');");
+
+		ResultSet res = mysql.execRequest("SELECT idLivreur FROM Livreur WHERE login='" + login + "';");
+		try {
+			res.next();
+			idLivreur = res.getInt("idLivreur");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

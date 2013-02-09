@@ -16,7 +16,7 @@ public class GestionnairePVE extends Utilisateur {
 		
 		MySQLManager mysql = MySQLManager.getMySQLManager();
 		
-		ResultSet res = mysql.exec("SELECT * FROM Client WHERE login='" + login + "';");
+		ResultSet res = mysql.execRequest("SELECT * FROM Client WHERE login='" + login + "';");
 		
 		try {
 			res.next();
@@ -25,6 +25,29 @@ public class GestionnairePVE extends Utilisateur {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public GestionnairePVE(String login, String motDePasse, String nom, String prenom, 
+			String adresse, String ville, String codePostal, String mail, int tel) {
+		super(login, motDePasse, nom, prenom, adresse, ville, codePostal, mail, tel);
+	}
+	
+	/**
+	 * Insère l'utilisateur dans la base de données
+	 */
+	public void insert() {
+		super.insert();
+		MySQLManager mysql = MySQLManager.getMySQLManager();
+		mysql.execModif("INSERT INTO gestionnairepve (login) " +
+				"VALUES ('" + login + "');");
+
+		ResultSet res = mysql.execRequest("SELECT idGestionnaire FROM gestionnairepve WHERE login='" + login + "';");
+		try {
+			res.next();
+			idGestionnaire = res.getInt("idGestionnaire");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
