@@ -8,6 +8,36 @@ import modele.MySQLManager;
 
 public abstract class Utilisateur {
 	
+	protected TypeUtilisateur typeUtilisateur;
+	
+	protected String login;
+	protected String nom;
+	protected String prenom;
+	protected String adresse;
+	protected String ville;
+	protected String codePostal;
+	protected String mail;
+	protected int tel;
+	
+	public Utilisateur(String login) {
+		MySQLManager mysql = MySQLManager.getMySQLManager();
+		ResultSet res = mysql.exec("SELECT * FROM utilisateur WHERE login='" + "" + login + "';");
+		
+		try {
+			res.next();
+			this.login = login;
+			nom = res.getString("nom");
+			prenom = res.getString("prenom");
+			adresse = res.getString("adresse");
+			ville = res.getString("ville");
+			codePostal = res.getString("codePostal");
+			mail = res.getString("mail");
+			tel = res.getInt("tel");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Fonction statique permettant de connecter un utilisateur
 	 * @param mysql : instance pour la connexion à la bd
@@ -15,9 +45,10 @@ public abstract class Utilisateur {
 	 * @param password
 	 * @return retourne null si les identifiants sont faux, un objet représentant l'utilisateur sinon
 	 */
-	public static Utilisateur connect(MySQLManager mysql, String login, String password) {
+	public static Utilisateur connect(String login, String password) {
+		MySQLManager mysql = MySQLManager.getMySQLManager();
 		
-		ResultSet res = mysql.exec("SELECT COUNT(*) AS compte FROM Utilisateur WHERE login='" + login + "' AND motDePasse=sha1('" + password + "') ;");
+		ResultSet res = mysql.exec("SELECT COUNT(*) AS compte FROM utilisateur WHERE login='" + login + "' AND motDePasse=sha1('" + password + "') ;");
 		
 		boolean connected = false;		
 		try {
@@ -29,8 +60,12 @@ public abstract class Utilisateur {
 		}
 		
 		if(connected)
-			return returnUser(mysql, login);
+			return returnUser(login);
 		return null;
+	}
+	
+	public TypeUtilisateur getType() {
+		return this.typeUtilisateur;
 	}
 	
 	/**
@@ -39,7 +74,8 @@ public abstract class Utilisateur {
 	 * @param login
 	 * @return retourne null si l'utilisateur n'est pas trouvé
 	 */
-	public static Utilisateur returnUser(MySQLManager mysql, String login) {
+	public static Utilisateur returnUser(String login) {
+		MySQLManager mysql = MySQLManager.getMySQLManager();
 		try {
 			// Cas d'un gestionnaire
 			ResultSet res = mysql.exec("SELECT COUNT(*) AS estGestionnaire FROM Utilisateur NATURAL JOIN gestionnairepve WHERE login='" + login + "' ;");
@@ -70,6 +106,14 @@ public abstract class Utilisateur {
 			return null;
 		}
 		return null;
+	}
+
+	@Override
+	public String toString() {
+		return "Utilisateur [typeUtilisateur=" + typeUtilisateur + ", login="
+				+ login + ", nom=" + nom + ", prenom=" + prenom + ", adresse="
+				+ adresse + ", ville=" + ville + ", codePostal=" + codePostal
+				+ ", mail=" + mail + ", tel=" + tel + "]";
 	}
 
 }

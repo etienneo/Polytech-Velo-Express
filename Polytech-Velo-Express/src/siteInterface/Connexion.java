@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import modele.MySQLManager;
+import modele.SessionManager;
 import modele.utilisateurs.Utilisateur;
 
 /**
@@ -44,16 +45,18 @@ public class Connexion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		MySQLManager mysql = new MySQLManager();
+		MySQLManager mysql = MySQLManager.getMySQLManager();
 		request.setAttribute("title", "Connexion");
 		
 		boolean essai = request.getParameter("user") != null && request.getParameter("password") != null &&
 				request.getParameter("user") != "" && request.getParameter("password") != "";
 		
 		if(essai) {
-			Utilisateur user = Utilisateur.connect(mysql, request.getParameter("user"), request.getParameter("password"));
-			if(user != null)
+			Utilisateur user = Utilisateur.connect(request.getParameter("user"), request.getParameter("password"));
+			if(user != null) {
+				SessionManager.startSession(request, user);
 				getServletContext().getRequestDispatcher("/index").forward(request, response);
+			}
 			else {
 				request.setAttribute("erreur", "Le nom d'utilisateur ou mot de passe n'est pas bon.");
 				getServletContext().getRequestDispatcher("/connexion.jsp").forward(request, response);

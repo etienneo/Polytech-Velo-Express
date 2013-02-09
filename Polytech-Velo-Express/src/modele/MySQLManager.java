@@ -6,12 +6,20 @@ import java.sql.SQLException;
 import com.mysql.*;
 
 public class MySQLManager {
-	private String dbURL = "127.0.0.1:3306";
-	private String table = "pve_db";
-	private String user = "root";
-	private String password = "";
+	private String dbURL;
+	private String table;
+	private String user;
+	private String password;
 	private java.sql.Connection dbConnect = null;
 	private java.sql.Statement dbStatement = null;
+	
+	private static MySQLManager manager = null;
+	
+	public final static MySQLManager getMySQLManager() {
+		if(manager == null)
+			manager = new MySQLManager("127.0.0.1:3306", "pve_db", "root", "");
+		return manager;
+	}
 
 	/**
 	 * Constructeur
@@ -19,14 +27,11 @@ public class MySQLManager {
 	 * @param user
 	 * @param password
 	 */
-	public MySQLManager(String url, String table, String user, String password) {
+	private MySQLManager(String url, String table, String user, String password) {
 		this.dbURL = url;
 		this.table = table;
 		this.user = user;
 		this.password = password;
-	}
-	
-	public MySQLManager() {
 		this.connect();
 	}
 
@@ -63,6 +68,7 @@ public class MySQLManager {
 			return rs;
 		} catch (SQLException ex) {
 			System.out.println("SQL Exception Requête");
+			ex.printStackTrace();
 		}
 		return null;
 	}
@@ -74,8 +80,19 @@ public class MySQLManager {
 		try {
 			this.dbStatement.close();
 			this.dbConnect.close();
+			// On supprime l'instance
+			manager=null;
 		} catch (SQLException ex) {
 			System.out.println("SQL Exception Close");
 		}
 	}
+	
+	/**
+	 * Lors de la destruction de l'objet, on ferme la connexion mysql
+	 */
+	protected void finalize() throws Throwable {
+		manager.close();
+	}
+
+	
 }

@@ -21,5 +21,15 @@
     <servlet-name>Connexion</servlet-name>  
     <url-pattern>/connexion</url-pattern>  
   </servlet-mapping> 
+  
+  <!-- Gestion de la déconnexion -->
+  <servlet>
+  	<servlet-name>Deconnexion</servlet-name>
+    <servlet-class>siteInterface.Deconnexion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Deconnexion</servlet-name>
+    <url-pattern>/deconnexion</url-pattern>
+  </servlet-mapping> 
   	
 </web-app> 

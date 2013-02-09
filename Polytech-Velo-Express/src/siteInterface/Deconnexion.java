@@ -7,9 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Accueil extends HttpServlet {
+import modele.SessionManager;
+
+public class Deconnexion extends HttpServlet {
 	
-	public Accueil() {
+	public Deconnexion() {
 		super();
 	}
 	
@@ -20,6 +22,8 @@ public class Accueil extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		SessionManager.closeSession(request);
 		getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 	}
+
 }

@@ -3,24 +3,56 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
+<%@ page import="modele.SessionManager"%>
+<%@ page import="modele.utilisateurs.Utilisateur"%> 
+<%@ page import="modele.utilisateurs.TypeUtilisateur"%> 
+<% HttpSession sess = SessionManager.getSession(request); %>
+
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-			<% String title = (String)request.getAttribute("title");
-			title = (null != title) ? title + " - " : ""; %>
+			<% String title = (String)request.getAttribute("title"); %>
+			<% title = (null != title) ? title + " - " : ""; %>
 			<title><%= title %>Polytech Velo Express</title>
 	</head>
 	<body>
 		<div id="header">
 			<h1><a href="index">Polytech Velo Express</a></h1>
+			<% if(sess.getAttribute("estConnecte") != null
+				&& sess.getAttribute("user") != null
+				&& (Boolean)sess.getAttribute("estConnecte")) { 
+					String type;
+					switch(((Utilisateur)sess.getAttribute("user")).getType()) {
+						case GESTIONNAIRE :
+							type = "gestionnaire";
+							break;
+						case LIVREUR :
+							type = "livreur";
+							break;
+						case COMMERCANT :
+							type = "commerçant";
+							break;
+						default:
+							type = "client";
+					}
+			%>
+				<p>Vous êtes connecté en tant que <%= type %></p>
+				<p><%= ((Utilisateur)sess.getAttribute("user")).toString() %></p>
+			<% } %>
 		</div>
 		<div id="menu">
 			<a href="index">Accueil</a>
 			<a href="produits">Produits</a>
 			<a href="faq">FAQ</a>
-			<a href="connexion">Connexion</a>
-			<a href="deconnexion">Déconnexion</a>
+			<% if(sess.getAttribute("estConnecte") == null
+				|| !(Boolean)sess.getAttribute("estConnecte")) { %>
 			<a href="inscription">Inscription</a>
+			<a href="connexion">Connexion</a>
+			<% } else { %>
 			<a href="panier">Mon Panier</a>
 			<a href="compte">Mon Compte</a>
+			<a href="deconnexion">Déconnexion</a>
+			<% } %>
 		</div>
 		<div id="corps">
+			
