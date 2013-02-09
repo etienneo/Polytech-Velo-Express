@@ -1,4 +1,8 @@
-<%! String title = "Connexion"; %><%@ include file="page/header.jspf" %>
+<%@ include file="page/header.jspf" %>
+
+<% if((String)request.getAttribute("erreur") != null) { %>
+<p><%= (String)request.getAttribute("erreur") %></p>
+<% } %>
 
 <form method="post" action="#">
 	<fieldset>

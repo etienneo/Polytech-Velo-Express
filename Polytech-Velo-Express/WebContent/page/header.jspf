@@ -5,10 +5,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-			<%!	String dispTitle = (""!=title) ? title+" - " : ""; %>
-			<title><%= dispTitle %>Polytech Velo Express</title>
+			<% String title = (String)request.getAttribute("title");
+			title = (null != title) ? title + " - " : ""; %>
+			<title><%= title %>Polytech Velo Express</title>
 	</head>
 	<body>
 		<div id="header">
 			<h1><a href="index">Polytech Velo Express</a></h1>
 		</div>
+		<div id="menu">
+			<a href="index">Accueil</a>
+			<a href="produits">Produits</a>
+			<a href="faq">FAQ</a>
+			<a href="connexion">Connexion</a>
+			<a href="deconnexion">Déconnexion</a>
+			<a href="inscription">Inscription</a>
+			<a href="panier">Mon Panier</a>
+			<a href="compte">Mon Compte</a>
+		</div>
+		<div id="corps">

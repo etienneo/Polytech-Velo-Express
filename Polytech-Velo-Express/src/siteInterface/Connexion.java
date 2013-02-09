@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import modele.MySQLManager;
-import modele.Utilisateur;
+import modele.utilisateurs.Utilisateur;
 
 /**
  * Servlet implementation class Connexion
@@ -44,6 +45,7 @@ public class Connexion extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		MySQLManager mysql = new MySQLManager();
+		request.setAttribute("title", "Connexion");
 		
 		boolean essai = request.getParameter("user") != null && request.getParameter("password") != null &&
 				request.getParameter("user") != "" && request.getParameter("password") != "";
@@ -52,9 +54,14 @@ public class Connexion extends HttpServlet {
 			Utilisateur user = Utilisateur.connect(mysql, request.getParameter("user"), request.getParameter("password"));
 			if(user != null)
 				getServletContext().getRequestDispatcher("/index").forward(request, response);
+			else {
+				request.setAttribute("erreur", "Le nom d'utilisateur ou mot de passe n'est pas bon.");
+				getServletContext().getRequestDispatcher("/connexion.jsp").forward(request, response);
+			}
 		}
+		else
+			getServletContext().getRequestDispatcher("/connexion.jsp").forward(request, response);
 		
-		getServletContext().getRequestDispatcher("/connexion.jsp").forward(request, response);
 		mysql.close();
 	}
 
