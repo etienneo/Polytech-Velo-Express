@@ -15,8 +15,31 @@ public class Client extends Utilisateur {
 		
 		MySQLManager mysql = MySQLManager.getMySQLManager();
 		
-		ResultSet res = mysql.exec("SELECT * FROM Client WHERE login='" + login + "';");
+		ResultSet res = mysql.execRequest("SELECT * FROM Client WHERE login='" + login + "';");
 		
+		try {
+			res.next();
+			idClient = res.getInt("idClient");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public Client(String login, String motDePasse, String nom, String prenom, 
+			String adresse, String ville, String codePostal, String mail, int tel) {
+		super(login, motDePasse, nom, prenom, adresse, ville, codePostal, mail, tel);
+	}
+	
+
+	/**
+	 * Insère l'utilisateur dans la base de données
+	 */
+	public void insert() {
+		super.insert();
+		MySQLManager mysql = MySQLManager.getMySQLManager();
+		mysql.execModif("INSERT INTO client (login) VALUES ('" + login + "');");
+
+		ResultSet res = mysql.execRequest("SELECT idClient FROM Client WHERE login='" + login + "';");
 		try {
 			res.next();
 			idClient = res.getInt("idClient");

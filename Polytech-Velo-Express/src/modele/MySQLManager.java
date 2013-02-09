@@ -62,7 +62,7 @@ public class MySQLManager {
 	 * @param sql
 	 * @return resultat de la requete
 	 */
-	public ResultSet exec(String sql) {
+	public ResultSet execRequest(String sql) {
 		try {
 			ResultSet rs = this.dbStatement.executeQuery(sql);
 			return rs;
@@ -71,6 +71,22 @@ public class MySQLManager {
 			ex.printStackTrace();
 		}
 		return null;
+	}
+	
+	/**
+	 * Executer une requete SQL
+	 * @param sql
+	 * @return resultat de la requete
+	 */
+	public int execModif(String sql) {
+		try {
+			int rs = this.dbStatement.executeUpdate(sql);
+			return rs;
+		} catch (SQLException ex) {
+			System.out.println("SQL Exception Requête");
+			ex.printStackTrace();
+		}
+		return -1;
 	}
 
 	/**

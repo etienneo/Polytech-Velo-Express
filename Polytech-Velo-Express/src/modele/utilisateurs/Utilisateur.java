@@ -11,6 +11,7 @@ public abstract class Utilisateur {
 	protected TypeUtilisateur typeUtilisateur;
 	
 	protected String login;
+	protected String motDePasse;
 	protected String nom;
 	protected String prenom;
 	protected String adresse;
@@ -21,7 +22,7 @@ public abstract class Utilisateur {
 	
 	public Utilisateur(String login) {
 		MySQLManager mysql = MySQLManager.getMySQLManager();
-		ResultSet res = mysql.exec("SELECT * FROM utilisateur WHERE login='" + "" + login + "';");
+		ResultSet res = mysql.execRequest("SELECT * FROM utilisateur WHERE login='" + "" + login + "';");
 		
 		try {
 			res.next();
@@ -38,6 +39,31 @@ public abstract class Utilisateur {
 		}
 	}
 	
+	public Utilisateur(String login, String motDePasse, String nom, String prenom, 
+			String adresse, String ville, String codePostal, String mail, int tel) {
+		this.login = login;
+		this.motDePasse = motDePasse;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresse = adresse;
+		this.ville = ville;
+		this.codePostal = codePostal;
+		this.mail = mail;
+		this.tel = tel;
+	}
+	
+	/**
+	 * Insère l'utilisateur dans la base de données
+	 */
+	public void insert() {
+		MySQLManager mysql = MySQLManager.getMySQLManager();
+		mysql.execModif("INSERT INTO utilisateur " +
+			"(login, motDePasse, nom, prenom, adresse, ville, codePostal, mail, tel) " +
+			"VALUES ('" + login + "', sha1('" + motDePasse + "'), '" + nom + "', '" +
+			prenom + "', '" + adresse + "', '" + ville + "', '" + codePostal + "', '" +
+			mail + "', " + tel +");");
+	}
+	
 	/**
 	 * Fonction statique permettant de connecter un utilisateur
 	 * @param mysql : instance pour la connexion à la bd
@@ -48,7 +74,7 @@ public abstract class Utilisateur {
 	public static Utilisateur connect(String login, String password) {
 		MySQLManager mysql = MySQLManager.getMySQLManager();
 		
-		ResultSet res = mysql.exec("SELECT COUNT(*) AS compte FROM utilisateur WHERE login='" + login + "' AND motDePasse=sha1('" + password + "') ;");
+		ResultSet res = mysql.execRequest("SELECT COUNT(*) AS compte FROM utilisateur WHERE login='" + login + "' AND motDePasse=sha1('" + password + "') ;");
 		
 		boolean connected = false;		
 		try {
@@ -78,25 +104,25 @@ public abstract class Utilisateur {
 		MySQLManager mysql = MySQLManager.getMySQLManager();
 		try {
 			// Cas d'un gestionnaire
-			ResultSet res = mysql.exec("SELECT COUNT(*) AS estGestionnaire FROM Utilisateur NATURAL JOIN gestionnairepve WHERE login='" + login + "' ;");
+			ResultSet res = mysql.execRequest("SELECT COUNT(*) AS estGestionnaire FROM Utilisateur NATURAL JOIN gestionnairepve WHERE login='" + login + "' ;");
 			res.next();
 			if(res.getInt("estGestionnaire") == 1)
 				return new GestionnairePVE(login);
 
 			// Cas d'un commercant
-			res = mysql.exec("SELECT COUNT(*) AS estCommercant FROM Utilisateur NATURAL JOIN commercant WHERE login='" + login + "' ;");
+			res = mysql.execRequest("SELECT COUNT(*) AS estCommercant FROM Utilisateur NATURAL JOIN commercant WHERE login='" + login + "' ;");
 			res.next();
 			if(res.getInt("estCommercant") == 1)
 				return new Commercant(login);
 
 			// Cas d'un livreur
-			res = mysql.exec("SELECT COUNT(*) AS estLivreur FROM Utilisateur NATURAL JOIN livreur WHERE login='" + login + "' ;");
+			res = mysql.execRequest("SELECT COUNT(*) AS estLivreur FROM Utilisateur NATURAL JOIN livreur WHERE login='" + login + "' ;");
 			res.next();
 			if(res.getInt("estLivreur") == 1)
 				return new Livreur(login);
 			
 			// Cas d'un client
-			res = mysql.exec("SELECT COUNT(*) AS estClient FROM Utilisateur NATURAL JOIN Client WHERE login='" + login + "' ;");
+			res = mysql.execRequest("SELECT COUNT(*) AS estClient FROM Utilisateur NATURAL JOIN Client WHERE login='" + login + "' ;");
 			res.next();
 			if(res.getInt("estClient") == 1)
 				return new Client(login);
