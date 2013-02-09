@@ -13,4 +13,9 @@
 	</fieldset>
 </form>
 
+<p>
+Pas encore inscrit ? 
+<a href="inscription.jsp">S'inscrire ici.</a>
+</p>
+
 <%@ include file="page/footer.jspf" %>

@@ -31,5 +31,15 @@
     <servlet-name>Deconnexion</servlet-name>
     <url-pattern>/deconnexion</url-pattern>
   </servlet-mapping> 
-  	
+
+ <!-- Gestion de l'inscription -->
+  <servlet>
+  	<servlet-name>Inscription</servlet-name>  
+    <servlet-class>siteInterface.Inscription</servlet-class> 
+  </servlet>
+  <servlet-mapping>  
+    <servlet-name>Inscription</servlet-name>  
+    <url-pattern>/inscription</url-pattern>  
+  </servlet-mapping>  
+  
 </web-app> 
