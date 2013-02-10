@@ -55,7 +55,7 @@
    
   
   
- <!-- Ajout de produit -->
+ <!-- Ajout/Modification de produit -->
   <servlet>
   	<servlet-name>AjoutProduit</servlet-name>  
     <servlet-class>siteInterface.AjoutProduit</servlet-class> 
@@ -63,6 +63,16 @@
   <servlet-mapping>  
     <servlet-name>AjoutProduit</servlet-name>  
     <url-pattern>/ajoutproduit</url-pattern>  
-  </servlet-mapping>  
+  </servlet-mapping>
+  
+ <!-- Changement de disponibilite livreur -->
+  <servlet>
+  	<servlet-name>DispoLivreur</servlet-name>  
+    <servlet-class>siteInterface.DispoLivreur</servlet-class> 
+  </servlet>
+  <servlet-mapping>  
+    <servlet-name>DispoLivreur</servlet-name>  
+    <url-pattern>/modifdispo</url-pattern>  
+  </servlet-mapping>
   
 </web-app> 

@@ -17,11 +17,11 @@ public class Livreur extends Utilisateur {
 		
 		MySQLManager mysql = MySQLManager.getMySQLManager();
 		
-		ResultSet res = mysql.execRequest("SELECT * FROM Client WHERE login='" + login +"';");
+		ResultSet res = mysql.execRequest("SELECT * FROM LIVREUR WHERE login='" + login +"';");
 		
 		try {
 			res.next();
-			idLivreur = res.getInt("idClient");
+			idLivreur = res.getInt("idLivreur");
 			disponibilite = res.getBoolean("disponibilite");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -55,11 +55,25 @@ public class Livreur extends Utilisateur {
 			e.printStackTrace();
 		}
 	}
+	
+	public int changerDisponibilite() {
+		MySQLManager mysql = MySQLManager.getMySQLManager();
+		int nvDispo = (disponibilite) ? 0 : 1;
+		int ret = mysql.execModif("UPDATE Livreur SET " +
+				"disponibilite=" + nvDispo + " WHERE idLivreur=" + idLivreur + ";");
+		if(ret > 0)
+			disponibilite = !disponibilite;
+		return ret;
+	}
 
 	@Override
 	public String toString() {
 		return "Livreur [idLivreur=" + idLivreur + ", disponibilite="
 				+ disponibilite + ", toString()=" + super.toString() + "]";
+	}
+	
+	public boolean getDisponibilite() {
+		return disponibilite;
 	}
 
 }
