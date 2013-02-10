@@ -1,4 +1,6 @@
 <%@page import="modele.utilisateurs.Client"%>
+<%@page import="modele.utilisateurs.Commercant"%>
+<%@page import="modele.utilisateurs.Livreur"%>
 <%@ include file="page/header.jspf" %>
 
 <%
@@ -11,11 +13,29 @@ String cp = request.getParameter("cpInscription");
 String ville = request.getParameter("villeInscription");
 String mail = request.getParameter("mailInscription");
 String tel = request.getParameter("telInscription");
+String nomBoutique = request.getParameter("nomBoutiqueInscription");
 
 if (login!=null && mdp!=null && nom!=null && prenom!=null && adresse!=null && cp!=null && ville!=null && mail!=null && tel!=null)
 {
-	Utilisateur user = new Client(login, mdp, nom, prenom, adresse, ville, cp, mail, tel);
-	user.insert();
+	if(request.getParameter("type") == null || request.getParameter("type") == "client" )
+	{
+		Utilisateur user = new Client(login, mdp, nom, prenom, adresse, ville, cp, mail, tel);
+		user.insert();
+	}
+	else if (request.getParameter("type") == "livreur")
+	{
+		Utilisateur user = new Livreur(login, mdp, nom, prenom, adresse, ville, cp, mail, tel, false);
+		user.insert();
+	}
+	else if (request.getParameter("type") == "commercant")
+	{
+		if(nomBoutique != null)
+		{
+			Utilisateur user = new Commercant(login, mdp, nom, prenom, adresse, ville, cp, mail, tel, nomBoutique);		
+			user.insert();
+		}
+	}
+	
 	out.println("<p>Votre compte a bien été créé.</p>");
 }
 else
@@ -55,6 +75,14 @@ else
 		<label>Téléphone : <input type="text" name="telInscription" id="telInscription" /></label>
 		<br/>
 		<br/>
+		<% if(request.getParameter("type") != null && request.getParameter("type").equals("commercant")) { %>
+		<label>Nom boutique : <input type="text" name="nomBoutiqueInscription" id="nomBoutiqueInscription" /></label>
+		<br/>
+		<br/>
+		<% } %>
+		<% if(request.getParameter("type") != null) { %>
+		<input type="hidden" name="type" value="<%= request.getParameter("type") %>" />
+		<% } %>
 		<input type="submit" value="Valider"/>
  		<input type="reset" name="reset" value="Annuler" >
 	</fieldset>

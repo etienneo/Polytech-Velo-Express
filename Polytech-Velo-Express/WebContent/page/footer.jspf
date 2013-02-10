@@ -1,3 +1,8 @@
 		</div>
+		<div>
+			<a href="inscription?type=commercant">S'inscrire ici si vous êtes un commerçant.</a>
+			<a href="inscription?type=livreur">S'inscrire ici si vous êtes un livreur.</a>
+			
+		</div>
 	</body>
 </html>
