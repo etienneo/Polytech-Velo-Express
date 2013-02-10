@@ -14,12 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import modele.MySQLManager;
 
-
-public class Produits extends HttpServlet 
+public class PenseBete extends HttpServlet
 {
-
-	public Produits()
+	public PenseBete()
 	{
+		
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
@@ -32,11 +31,11 @@ public class Produits extends HttpServlet
 	{
 		// TODO Auto-generated method stub
 		MySQLManager mysql = MySQLManager.getMySQLManager();
-		ResultSet res = mysql.execRequest("SELECT * FROM (produit NATURAL JOIN commercant) WHERE (quantite - nbReserve) > 0;");
+		ResultSet res = mysql.execRequest("SELECT message FROM penseBete WHERE dureeVie > 0;");
 		
-		request.setAttribute("title", "Produits");
-		request.setAttribute("produits", res);
+		request.setAttribute("title", "PenseBete");
+		request.setAttribute("penseBete", res);
 		
-		getServletContext().getRequestDispatcher("/produits.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/penseBete.jsp").forward(request, response);
 	}
 }
