@@ -72,6 +72,10 @@ public class Livreur extends Utilisateur {
 				+ disponibilite + ", toString()=" + super.toString() + "]";
 	}
 	
+	public int getIdLivreur() {
+		return idLivreur;
+	}
+
 	public boolean getDisponibilite() {
 		return disponibilite;
 	}
