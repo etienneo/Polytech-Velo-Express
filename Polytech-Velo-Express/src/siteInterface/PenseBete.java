@@ -31,7 +31,7 @@ public class PenseBete extends HttpServlet
 	{
 		// TODO Auto-generated method stub
 		MySQLManager mysql = MySQLManager.getMySQLManager();
-		ResultSet res = mysql.execRequest("SELECT message FROM penseBete WHERE dureeVie > 0;");
+		ResultSet res = mysql.execRequest("SELECT message FROM penseBete WHERE dureeVie > 0 AND infoTrafic = 1;");
 		
 		request.setAttribute("title", "PenseBete");
 		request.setAttribute("penseBete", res);
