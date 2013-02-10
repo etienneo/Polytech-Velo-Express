@@ -18,7 +18,7 @@ public abstract class Utilisateur {
 	protected String ville;
 	protected String codePostal;
 	protected String mail;
-	protected int tel;
+	protected String tel;
 	
 	public Utilisateur(String login) {
 		MySQLManager mysql = MySQLManager.getMySQLManager();
@@ -33,14 +33,14 @@ public abstract class Utilisateur {
 			ville = res.getString("ville");
 			codePostal = res.getString("codePostal");
 			mail = res.getString("mail");
-			tel = res.getInt("tel");
+			tel = res.getString("tel");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public Utilisateur(String login, String motDePasse, String nom, String prenom, 
-			String adresse, String ville, String codePostal, String mail, int tel) {
+			String adresse, String ville, String codePostal, String mail, String tel) {
 		this.login = login;
 		this.motDePasse = motDePasse;
 		this.nom = nom;
