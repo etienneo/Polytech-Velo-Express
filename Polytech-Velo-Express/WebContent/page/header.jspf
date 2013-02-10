@@ -8,31 +8,48 @@
 <%@ page import="modele.utilisateurs.Utilisateur"%> 
 <%@ page import="modele.utilisateurs.TypeUtilisateur"%>
 
+<%
+	String title = (String)request.getAttribute("title");
+	title = (null != title) ? title + " - " : "";
+	
+	String type = "";
+	if(SessionManager.getUtilisateur(request) != null) {
+		switch(SessionManager.getUtilisateur(request).getType()) {
+			case GESTIONNAIRE :
+				type = "gestionnaire";
+				break;
+			case LIVREUR :
+				type = "livreur";
+				break;
+			case COMMERCANT :
+				type = "commerçant";
+				break;
+			default:
+				type = "client";
+		}
+	}
+%>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-			<% String title = (String)request.getAttribute("title"); %>
-			<% title = (null != title) ? title + " - " : ""; %>
 			<title><%= title %>Polytech Velo Express</title>
 	</head>
 	<body>
+		<% if(SessionManager.getUtilisateur(request) != null && 
+				SessionManager.getUtilisateur(request).getType() == TypeUtilisateur.COMMERCANT) { %>
+		<div id="menuCommercant">
+			<a href="">Voir/Modifier mes produits</a>
+			<a href="ajoutproduit">Ajouter un produit</a>
+		</div>
+		<% } else if(SessionManager.getUtilisateur(request) != null && 
+				SessionManager.getUtilisateur(request).getType() == TypeUtilisateur.LIVREUR) { %>
+		<div id="menuLivreur">
+			<a href="">Voir mes pense-bête</a>
+			<a href="modifdispo">Modifier ma disponibilité</a>
+		</div>
+		<% } %>
 		<div id="header">
 			<h1><a href="index">Polytech Velo Express</a></h1>
-			<% if(SessionManager.getUtilisateur(request) != null) { 
-					String type;
-					switch(SessionManager.getUtilisateur(request).getType()) {
-						case GESTIONNAIRE :
-							type = "gestionnaire";
-							break;
-						case LIVREUR :
-							type = "livreur";
-							break;
-						case COMMERCANT :
-							type = "commerçant";
-							break;
-						default:
-							type = "client";
-					}
-			%>
+			<% if(SessionManager.getUtilisateur(request) != null) { %>
 				<p>Vous êtes connecté en tant que <%= type %></p>
 			<% } %>
 		</div>
@@ -41,7 +58,9 @@
 			<a href="produits">Produits</a>
 			<a href="faq">FAQ</a>
 			<% if(SessionManager.estConnecte(request)) { %>
+			<% if(SessionManager.getUtilisateur(request).getType() == TypeUtilisateur.CLIENT) { %>
 			<a href="panier">Mon Panier</a>
+			<% } %>
 			<a href="compte">Mon Compte</a>
 			<a href="deconnexion">Déconnexion</a>
 			<% } else { %>
