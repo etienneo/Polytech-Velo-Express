@@ -32,7 +32,7 @@ public class Produits extends HttpServlet
 	{
 		// TODO Auto-generated method stub
 		MySQLManager mysql = MySQLManager.getMySQLManager();
-		ResultSet res = mysql.execRequest("SELECT * FROM produit;");
+		ResultSet res = mysql.execRequest("SELECT * FROM (produit NATURAL JOIN commercant);");
 		
 		request.setAttribute("title", "Produits");
 		request.setAttribute("produits", res);
