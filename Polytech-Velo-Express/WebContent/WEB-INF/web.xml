@@ -85,4 +85,14 @@
     <url-pattern>/modifdispo</url-pattern>  
   </servlet-mapping>
   
+   <!-- Ajout produit au panier -->
+  <servlet>
+  	<servlet-name>AjoutPanier</servlet-name>  
+    <servlet-class>siteInterface.AjoutPanier</servlet-class> 
+  </servlet>
+  <servlet-mapping>  
+    <servlet-name>AjoutPanier</servlet-name>  
+    <url-pattern>/ajoutpanier</url-pattern>  
+  </servlet-mapping>
+  
 </web-app> 
