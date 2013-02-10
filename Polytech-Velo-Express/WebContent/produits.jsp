@@ -3,6 +3,10 @@
 
 <%  ResultSet res = (ResultSet)request.getAttribute("produits"); %>
 
+<% if(request.getAttribute("messageAjout") != null) { %>
+<p><strong><%= request.getAttribute("messageAjout") %></strong></p>
+<% } %>
+
 <br/>
 <br/>
 <table>

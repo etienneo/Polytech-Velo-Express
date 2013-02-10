@@ -68,7 +68,7 @@ public class AjoutProduit extends HttpServlet {
 				SessionManager.getUtilisateur(request).getType() == TypeUtilisateur.COMMERCANT)
 			getServletContext().getRequestDispatcher("/ajoutproduit.jsp").forward(request, response);
 		else
-			getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+			response.sendRedirect("index");
 	
 	}
 }

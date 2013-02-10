@@ -43,7 +43,7 @@
 		<% } else if(SessionManager.getUtilisateur(request) != null && 
 				SessionManager.getUtilisateur(request).getType() == TypeUtilisateur.LIVREUR) { %>
 		<div id="menuLivreur">
-			<a href="">Voir mes pense-bête</a>
+			<a href="penseBete">Voir mes pense-bête</a>
 			<a href="modifdispo">Modifier ma disponibilité</a>
 		</div>
 		<% } %>

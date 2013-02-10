@@ -55,7 +55,7 @@ public class Connexion extends HttpServlet {
 			Utilisateur user = Utilisateur.connect(request.getParameter("user"), request.getParameter("password"));
 			if(user != null) {
 				SessionManager.startSession(request, user);
-				getServletContext().getRequestDispatcher("/index").forward(request, response);
+				response.sendRedirect("index");
 			}
 			else {
 				request.setAttribute("erreur", "Le nom d'utilisateur ou mot de passe n'est pas bon.");

@@ -90,6 +90,24 @@ public class Produit {
 		}
 		return appartient;
 	}
+	
+	// Augmente le nombre de produit réservés de la valeur passée en paramètre
+	public boolean reserver(int nbProduit) {
+		boolean reservationPossible=false;
+		MySQLManager mysql = MySQLManager.getMySQLManager();
+		ResultSet res = mysql.execRequest("SELECT nbReserve, quantite FROM produit WHERE idProduit=" + idProduit + ";");
+		try {
+			res.next();
+			if(res.getInt("quantite") - res.getInt("nbReserve") - nbProduit >= 0) {
+				mysql.execModif("UPDATE produit SET nbReserve=" + (res.getInt("nbReserve") + nbProduit) + " WHERE idProduit=" + idProduit + ";");
+				reservationPossible = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return reservationPossible;
+	}
 
 	public int getIdProduit() {
 		return idProduit;

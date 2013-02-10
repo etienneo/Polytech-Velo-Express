@@ -23,7 +23,7 @@ public class Deconnexion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		SessionManager.closeSession(request);
-		getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+		response.sendRedirect("index");
 	}
 
 }

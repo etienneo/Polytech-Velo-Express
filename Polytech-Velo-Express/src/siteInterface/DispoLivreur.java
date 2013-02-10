@@ -29,7 +29,7 @@ public class DispoLivreur extends HttpServlet {
 				SessionManager.getUtilisateur(request).getType() == TypeUtilisateur.LIVREUR)
 			getServletContext().getRequestDispatcher("/dispolivreur.jsp").forward(request, response);
 		else
-			getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+			response.sendRedirect("index");
 	
 	}
 

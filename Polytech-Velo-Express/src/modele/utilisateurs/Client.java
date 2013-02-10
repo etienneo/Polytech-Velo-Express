@@ -48,6 +48,10 @@ public class Client extends Utilisateur {
 		}
 	}
 	
+	public int getIdClient() {
+		return idClient;
+	}
+
 	@Override
 	public String toString() {
 		return "Client [idClient=" + idClient + ", toString()="
