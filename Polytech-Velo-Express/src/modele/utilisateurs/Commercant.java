@@ -28,7 +28,7 @@ public class Commercant extends Utilisateur {
 	}
 	
 	public Commercant(String login, String motDePasse, String nom, String prenom, 
-			String adresse, String ville, String codePostal, String mail, int tel, 
+			String adresse, String ville, String codePostal, String mail, String tel, 
 			String nomBoutique) {
 		super(login, motDePasse, nom, prenom, adresse, ville, codePostal, mail, tel);
 		this.nomBoutique = nomBoutique;

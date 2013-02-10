@@ -29,7 +29,7 @@ public class Livreur extends Utilisateur {
 	}
 	
 	public Livreur(String login, String motDePasse, String nom, String prenom, 
-			String adresse, String ville, String codePostal, String mail, int tel, 
+			String adresse, String ville, String codePostal, String mail, String tel, 
 			boolean disponibilite) {
 		super(login, motDePasse, nom, prenom, adresse, ville, codePostal, mail, tel);
 		this.disponibilite = disponibilite;

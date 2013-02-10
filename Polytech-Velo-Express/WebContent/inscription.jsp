@@ -1,3 +1,4 @@
+<%@page import="modele.utilisateurs.Client"%>
 <%@ include file="page/header.jspf" %>
 
 <%
@@ -8,14 +9,17 @@ String prenom = request.getParameter("prenomInscription");
 String adresse = request.getParameter("adresseInscription");
 String cp = request.getParameter("cpInscription");
 String ville = request.getParameter("villeInscription");
-String email = request.getParameter("emailInscription");
+String mail = request.getParameter("mailInscription");
 String tel = request.getParameter("telInscription");
 
-if (login!=null && mdp!=null && nom!=null && prenom!=null && adresse!=null && cp!=null && ville!=null && email!=null && tel!=null)
-{ 
-	out.println("Votre compte a bien été créé.");
-    out.close();  //cesser de charger la page
+if (login!=null && mdp!=null && nom!=null && prenom!=null && adresse!=null && cp!=null && ville!=null && mail!=null && tel!=null)
+{
+	Utilisateur user = new Client(login, mdp, nom, prenom, adresse, ville, cp, mail, tel);
+	user.insert();
+	out.println("<p>Votre compte a bien été créé.</p>");
 }
+else
+{
 %>
 
 <% // Début du formulaire %>
@@ -107,5 +111,7 @@ function verifierChamps()
 	    return true;
 }
 </script>
+
+<% } %>
 
 <%@ include file="page/footer.jspf" %>

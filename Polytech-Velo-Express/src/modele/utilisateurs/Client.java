@@ -26,7 +26,7 @@ public class Client extends Utilisateur {
 	}
 	
 	public Client(String login, String motDePasse, String nom, String prenom, 
-			String adresse, String ville, String codePostal, String mail, int tel) {
+			String adresse, String ville, String codePostal, String mail, String tel) {
 		super(login, motDePasse, nom, prenom, adresse, ville, codePostal, mail, tel);
 	}
 	
