@@ -42,4 +42,15 @@
     <url-pattern>/inscription</url-pattern>  
   </servlet-mapping>  
   
+  
+ <!-- Ajout de produit -->
+  <servlet>
+  	<servlet-name>AjoutProduit</servlet-name>  
+    <servlet-class>siteInterface.AjoutProduit</servlet-class> 
+  </servlet>
+  <servlet-mapping>  
+    <servlet-name>AjoutProduit</servlet-name>  
+    <url-pattern>/ajoutproduit</url-pattern>  
+  </servlet-mapping>  
+  
 </web-app> 

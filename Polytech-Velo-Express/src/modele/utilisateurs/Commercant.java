@@ -52,12 +52,14 @@ public class Commercant extends Utilisateur {
 		}
 	}
 
+	public int getIdCommercant() {
+		return idCommercant;
+	}
+
 	@Override
 	public String toString() {
 		return "Commercant [idCommercant=" + idCommercant + ", nomBoutique="
 				+ nomBoutique + ", toString()=" + super.toString() + "]";
 	}
-	
-	
 
 }

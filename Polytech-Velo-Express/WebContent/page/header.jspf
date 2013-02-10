@@ -6,8 +6,7 @@
 
 <%@ page import="modele.SessionManager"%>
 <%@ page import="modele.utilisateurs.Utilisateur"%> 
-<%@ page import="modele.utilisateurs.TypeUtilisateur"%> 
-<% HttpSession sess = SessionManager.getSession(request); %>
+<%@ page import="modele.utilisateurs.TypeUtilisateur"%>
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -18,11 +17,9 @@
 	<body>
 		<div id="header">
 			<h1><a href="index">Polytech Velo Express</a></h1>
-			<% if(sess.getAttribute("estConnecte") != null
-				&& sess.getAttribute("user") != null
-				&& (Boolean)sess.getAttribute("estConnecte")) { 
+			<% if(SessionManager.getUtilisateur(request) != null) { 
 					String type;
-					switch(((Utilisateur)sess.getAttribute("user")).getType()) {
+					switch(SessionManager.getUtilisateur(request).getType()) {
 						case GESTIONNAIRE :
 							type = "gestionnaire";
 							break;
@@ -37,21 +34,19 @@
 					}
 			%>
 				<p>Vous êtes connecté en tant que <%= type %></p>
-				<p><%= ((Utilisateur)sess.getAttribute("user")).toString() %></p>
 			<% } %>
 		</div>
 		<div id="menu">
 			<a href="index">Accueil</a>
 			<a href="produits">Produits</a>
 			<a href="faq">FAQ</a>
-			<% if(sess.getAttribute("estConnecte") == null
-				|| !(Boolean)sess.getAttribute("estConnecte")) { %>
-			<a href="inscription">Inscription</a>
-			<a href="connexion">Connexion</a>
-			<% } else { %>
+			<% if(SessionManager.estConnecte(request)) { %>
 			<a href="panier">Mon Panier</a>
 			<a href="compte">Mon Compte</a>
 			<a href="deconnexion">Déconnexion</a>
+			<% } else { %>
+			<a href="inscription">Inscription</a>
+			<a href="connexion">Connexion</a>
 			<% } %>
 		</div>
 		<div id="corps">
