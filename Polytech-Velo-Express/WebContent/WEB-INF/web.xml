@@ -52,6 +52,16 @@
     <url-pattern>/produits</url-pattern>  
   </servlet-mapping> 
   
+  <!-- Gestion des pense Bete (messages liés au trafic routier) -->
+  <servlet>
+  	<servlet-name>PenseBete</servlet-name>  
+    <servlet-class>siteInterface.PenseBete</servlet-class> 
+  </servlet>
+  <servlet-mapping>  
+    <servlet-name>PenseBete</servlet-name>  
+    <url-pattern>/penseBete</url-pattern>  
+  </servlet-mapping> 
+  
    
   
   
