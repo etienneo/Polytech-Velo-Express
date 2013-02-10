@@ -14,7 +14,7 @@
 </form>
 
 <p>
-Pas encore inscrit ? 
+Pas encore inscrit ? <br/>
 <a href="inscription.jsp">S'inscrire ici.</a>
 </p>
 

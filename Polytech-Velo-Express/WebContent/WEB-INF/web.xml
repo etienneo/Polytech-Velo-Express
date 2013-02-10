@@ -32,7 +32,7 @@
     <url-pattern>/deconnexion</url-pattern>
   </servlet-mapping> 
 
- <!-- Gestion de l'inscription -->
+<!-- Gestion de l'inscription -->
   <servlet>
   	<servlet-name>Inscription</servlet-name>  
     <servlet-class>siteInterface.Inscription</servlet-class> 
@@ -40,7 +40,19 @@
   <servlet-mapping>  
     <servlet-name>Inscription</servlet-name>  
     <url-pattern>/inscription</url-pattern>  
-  </servlet-mapping>  
+  </servlet-mapping> 
+  
+<!-- Gestion de la page des produits -->
+  <servlet>
+  	<servlet-name>Produits</servlet-name>  
+    <servlet-class>siteInterface.Produits</servlet-class> 
+  </servlet>
+  <servlet-mapping>  
+    <servlet-name>Produits</servlet-name>  
+    <url-pattern>/produits</url-pattern>  
+  </servlet-mapping> 
+  
+   
   
   
  <!-- Ajout de produit -->
