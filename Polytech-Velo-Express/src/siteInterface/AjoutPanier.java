@@ -14,6 +14,7 @@ import modele.utilisateurs.TypeUtilisateur;
 import modele.utilisateurs.Client;
 
 public class AjoutPanier extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	
 	public AjoutPanier() {
 		super();

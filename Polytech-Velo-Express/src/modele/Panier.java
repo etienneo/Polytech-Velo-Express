@@ -58,11 +58,16 @@ public class Panier {
 				e.printStackTrace();
 			}
 			
-			
-			
-			
 			return true;
 		}
 		return false;
+	}
+
+	public int getIdPanier() {
+		return idPanier;
+	}
+
+	public int getIdClient() {
+		return idClient;
 	}
 }

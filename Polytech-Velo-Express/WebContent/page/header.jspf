@@ -37,7 +37,7 @@
 		<% if(SessionManager.getUtilisateur(request) != null && 
 				SessionManager.getUtilisateur(request).getType() == TypeUtilisateur.COMMERCANT) { %>
 		<div id="menuCommercant">
-			<a href="">Voir/Modifier mes produits</a>
+			<a href="produits?consult=1">Voir/Modifier mes produits</a>
 			<a href="ajoutproduit">Ajouter un produit</a>
 		</div>
 		<% } else if(SessionManager.getUtilisateur(request) != null && 
@@ -56,7 +56,6 @@
 		<div id="menu">
 			<a href="index">Accueil</a>
 			<a href="produits">Produits</a>
-			<a href="faq">FAQ</a>
 			<% if(SessionManager.estConnecte(request)) { %>
 			<% if(SessionManager.getUtilisateur(request).getType() == TypeUtilisateur.CLIENT) { %>
 			<a href="panier">Mon Panier</a>

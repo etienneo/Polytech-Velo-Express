@@ -48,6 +48,14 @@ public class Client extends Utilisateur {
 		}
 	}
 	
+	public ResultSet getPanier() {
+		MySQLManager mysql = MySQLManager.getMySQLManager();
+		return mysql.execRequest("SELECT idPanier, idClient, nom, paniercontientproduit.quantite, prix " +
+				"FROM (panier NATURAL JOIN paniercontientproduit) " +
+				"JOIN produit ON paniercontientproduit.idProduit = produit.idProduit " +
+				"WHERE idClient=" + idClient + ";");
+	}
+	
 	public int getIdClient() {
 		return idClient;
 	}

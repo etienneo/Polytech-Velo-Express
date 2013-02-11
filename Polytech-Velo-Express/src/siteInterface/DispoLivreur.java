@@ -7,11 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modele.Produit;
 import modele.SessionManager;
 import modele.utilisateurs.TypeUtilisateur;
 
 public class DispoLivreur extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	
 	public DispoLivreur() {
 		super();

@@ -105,4 +105,14 @@
     <url-pattern>/livraisonCommande</url-pattern>  
   </servlet-mapping>
   
+ <!-- Gestion du panier -->
+  <servlet>
+  	<servlet-name>Panier</servlet-name>  
+    <servlet-class>siteInterface.Panier</servlet-class> 
+  </servlet>
+  <servlet-mapping>  
+    <servlet-name>Panier</servlet-name>  
+    <url-pattern>/panier</url-pattern>  
+  </servlet-mapping>
+  
 </web-app> 

@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import modele.Produit;
 import modele.SessionManager;
 import modele.utilisateurs.TypeUtilisateur;
-import modele.utilisateurs.Utilisateur;
 
 public class AjoutProduit extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	
 	public AjoutProduit() {
 		super();
