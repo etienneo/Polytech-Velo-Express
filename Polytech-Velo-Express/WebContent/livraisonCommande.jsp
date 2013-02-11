@@ -1,22 +1,32 @@
 <%@ include file="page/header.jspf" %>
 <%@page import="java.sql.*"%>
 
-<%  ResultSet res1 = (ResultSet)request.getAttribute("livraisonCommande");
-	//ResultSet res2 = (ResultSet)request.getAttribute("info");%>
+<%  ResultSet res = (ResultSet)request.getAttribute("livraisonCommande"); %>
 	
-<br/>
-<br/>
 
 <%
    		int cmdPrec = 0;
-   		while(res1.next())
+   		while(res.next())
    		{
 		 %>
-		  
-		  <% if(cmdPrec != res1.getInt("idCommande")) { %>
-			<h3>Commande n° <%= res1.getInt("idCommande") %></h3>
+
+		  <% if(cmdPrec != res.getInt("idCommande")) { %>
+			<h3>Commande n° <%= res.getInt("idCommande") %></h3>
+			<p>Livrer de la boutique <strong><%= res.getString("nomBoutique") %></strong> à <br/>
+				<strong><%= res.getString("prenom") %></strong> <strong><%= res.getString("nomClient") %></strong><br/>
+				<strong><%= res.getString("adresse") %></strong><br/>
+				<strong><%= res.getString("codePostal") %></strong> <strong><%= res.getString("ville") %></strong><br/>
+				Téléphone : <strong><%= res.getString("tel") %></strong><br/>
+			</p>
+			<h4>Produits</h4>
 			<% } %>
-   			<% cmdPrec = res1.getInt("idCommande"); %>
+				<p>
+					Produit : <strong><%= res.getString("quantite") %></strong>
+					 <strong><%= res.getString("nomProduit") %></strong>, 
+					 ref <strong><%= res.getString("referenceProduit") %></strong>
+			
+			
+   			<% cmdPrec = res.getInt("idCommande"); %>
 	 <% } %>
 	
 

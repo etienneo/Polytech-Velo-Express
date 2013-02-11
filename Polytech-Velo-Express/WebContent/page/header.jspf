@@ -44,6 +44,7 @@
 				SessionManager.getUtilisateur(request).getType() == TypeUtilisateur.LIVREUR) { %>
 		<div id="menuLivreur">
 			<a href="penseBete">Voir mes pense-bête</a>
+			<a href="livraisonCommande">Voir ma livraison</a>
 			<a href="modifdispo">Modifier ma disponibilité</a>
 		</div>
 		<% } %>

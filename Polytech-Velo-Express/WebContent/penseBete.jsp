@@ -3,11 +3,7 @@
 
 <%  ResultSet res = (ResultSet)request.getAttribute("penseBete"); %>
 
-<br/>
-<br/>
 	<h2>Infos trafic</h2>
-	<br/>
-	
 	<ul>
 	<% while(res.next())
 	   { %>

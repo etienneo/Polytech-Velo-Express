@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modele.MySQLManager;
+import modele.SessionManager;
+import modele.utilisateurs.TypeUtilisateur;
 
 public class PenseBete extends HttpServlet
 {
@@ -28,12 +30,17 @@ public class PenseBete extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		// TODO Auto-generated method stub
-		MySQLManager mysql = MySQLManager.getMySQLManager();
-		ResultSet res = mysql.execRequest("SELECT message FROM penseBete WHERE dureeVie > 0 AND infoTrafic = 1;");
-		
-		request.setAttribute("title", "PenseBete");
-		request.setAttribute("penseBete", res);
-		
-		getServletContext().getRequestDispatcher("/penseBete.jsp").forward(request, response);
+		if(SessionManager.getUtilisateur(request) != null &&
+				SessionManager.getUtilisateur(request).getType() == TypeUtilisateur.LIVREUR) {
+			MySQLManager mysql = MySQLManager.getMySQLManager();
+			ResultSet res = mysql.execRequest("SELECT message FROM penseBete WHERE infoTrafic = 1;");
+			
+			request.setAttribute("title", "PenseBete");
+			request.setAttribute("penseBete", res);
+			
+			getServletContext().getRequestDispatcher("/penseBete.jsp").forward(request, response);
+		}
+		else
+			response.sendRedirect("index");
 	}
 }
