@@ -60,7 +60,6 @@
 			<% if(SessionManager.getUtilisateur(request).getType() == TypeUtilisateur.CLIENT) { %>
 			<a href="panier">Mon Panier</a>
 			<% } %>
-			<a href="compte">Mon Compte</a>
 			<a href="deconnexion">Déconnexion</a>
 			<% } else { %>
 			<a href="inscription">Inscription</a>

@@ -93,20 +93,22 @@ public class Produit {
 	
 	// Augmente le nombre de produit réservés de la valeur passée en paramètre
 	public boolean reserver(int nbProduit) {
-		boolean reservationPossible=false;
-		MySQLManager mysql = MySQLManager.getMySQLManager();
-		ResultSet res = mysql.execRequest("SELECT nbReserve, quantite FROM produit WHERE idProduit=" + idProduit + ";");
-		try {
-			res.next();
-			if(res.getInt("quantite") - res.getInt("nbReserve") - nbProduit >= 0) {
-				mysql.execModif("UPDATE produit SET nbReserve=" + (res.getInt("nbReserve") + nbProduit) + " WHERE idProduit=" + idProduit + ";");
-				reservationPossible = true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if(quantite - nbReserve - nbProduit >= 0) {
+			MySQLManager mysql = MySQLManager.getMySQLManager();
+			nbReserve = nbReserve + nbProduit;
+			mysql.execModif("UPDATE produit SET nbReserve=" + nbReserve + " WHERE idProduit=" + idProduit + ";");
+			return true;
 		}
-		
-		return reservationPossible;
+		return false;
+	}
+	
+	// Augmente le nombre de produit réservés de la valeur passée en paramètre
+	public void validerAchat(int nbProduit) {
+		MySQLManager mysql = MySQLManager.getMySQLManager();
+		nbReserve = nbReserve - nbProduit;
+		quantite = quantite - nbProduit;
+		nbVendu += nbProduit;
+		mysql.execModif("UPDATE produit SET nbReserve=" + nbReserve + ", nbVendu=" + nbVendu + ", quantite=" + quantite + " WHERE idProduit=" + idProduit + ";");
 	}
 
 	public int getIdProduit() {

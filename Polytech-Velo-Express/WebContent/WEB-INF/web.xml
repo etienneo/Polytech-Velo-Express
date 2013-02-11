@@ -115,4 +115,14 @@
     <url-pattern>/panier</url-pattern>  
   </servlet-mapping>
   
+ <!-- Validation du panier -->
+  <servlet>
+  	<servlet-name>ValidationPanier</servlet-name>  
+    <servlet-class>siteInterface.ValidationPanier</servlet-class> 
+  </servlet>
+  <servlet-mapping>  
+    <servlet-name>ValidationPanier</servlet-name>  
+    <url-pattern>/validerpanier</url-pattern>  
+  </servlet-mapping>
+  
 </web-app> 

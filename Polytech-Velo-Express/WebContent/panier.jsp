@@ -6,10 +6,15 @@
 
 <% float total = 0; %>
 
+<% if(request.getAttribute("message") != null) { %>
+<p><strong><%= request.getAttribute("message") %></strong></p>
+<% } %>
+
 <table>
 	<tr>
 		<th>Produit</th>
 		<th>Quantité</th>
+		<th>Prix Unitaire</th>
 		<th>Prix</th>
 	</tr>
 	
@@ -17,15 +22,16 @@
 	   { %>
 		<tr>
 			<td><%= res.getString("nom") %></td>
-			<td><%= res.getInt("paniercontientproduit.quantite") %></td>
+			<td><%= res.getInt("qte") %></td>
 			<td><%= res.getFloat("prix") %></td>
-			<% total += res.getInt("paniercontientproduit.quantite") * res.getFloat("prix"); %>
+			<td><%= res.getInt("qte") * res.getFloat("prix") %></td>
+			<% total += res.getInt("qte") * res.getFloat("prix"); %>
 		</tr>
 	<% } %>
 
 </table>
 
 <p>Coût total : <%= total %> euros<br/>
-<strong><a href="validePanier" >Valider le panier</a></strong></p>
+<strong><a href="validerpanier" >Valider le panier</a></strong></p>
 
 <%@ include file="page/footer.jspf" %>

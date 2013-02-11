@@ -30,7 +30,9 @@ public class Panier extends HttpServlet {
 		if(SessionManager.getUtilisateur(request) != null &&
 			SessionManager.getUtilisateur(request).getType() == TypeUtilisateur.CLIENT) {
 			ResultSet res = ((Client)SessionManager.getUtilisateur(request)).getPanier();
+			
 			request.setAttribute("produitsPanier", res);
+			request.setAttribute("title", "Panier");
 			getServletContext().getRequestDispatcher("/panier.jsp").forward(request, response);
 		}
 		else

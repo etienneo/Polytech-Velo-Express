@@ -50,10 +50,10 @@ public class Client extends Utilisateur {
 	
 	public ResultSet getPanier() {
 		MySQLManager mysql = MySQLManager.getMySQLManager();
-		return mysql.execRequest("SELECT idPanier, idClient, nom, paniercontientproduit.quantite, prix " +
+		return mysql.execRequest("SELECT idPanier, idClient, idCommercant, produit.idProduit AS idProduit, nom, paniercontientproduit.quantite AS qte, prix " +
 				"FROM (panier NATURAL JOIN paniercontientproduit) " +
 				"JOIN produit ON paniercontientproduit.idProduit = produit.idProduit " +
-				"WHERE idClient=" + idClient + ";");
+				"WHERE idClient=" + idClient + " ORDER BY idCommercant;");
 	}
 	
 	public int getIdClient() {
