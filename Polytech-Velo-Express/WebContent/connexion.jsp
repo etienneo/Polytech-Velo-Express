@@ -1,5 +1,7 @@
 <%@ include file="page/header.jspf" %>
 
+<h2>Connexion</h2>
+
 <% if((String)request.getAttribute("erreur") != null) { %>
 <p><%= (String)request.getAttribute("erreur") %></p>
 <% } %>
@@ -17,5 +19,4 @@
 Pas encore inscrit ? <br/>
 <a href="inscription.jsp">S'inscrire ici.</a>
 </p>
-
 <%@ include file="page/footer.jspf" %>

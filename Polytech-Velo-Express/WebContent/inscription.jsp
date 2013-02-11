@@ -3,6 +3,9 @@
 <%@page import="modele.utilisateurs.Livreur"%>
 <%@ include file="page/header.jspf" %>
 
+
+<h2>Inscription</h2>
+
 <%
 String login = request.getParameter("loginInscription");
 String mdp = request.getParameter("mdpInscription");

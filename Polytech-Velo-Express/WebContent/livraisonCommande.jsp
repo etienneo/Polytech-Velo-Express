@@ -1,6 +1,9 @@
 <%@ include file="page/header.jspf" %>
 <%@page import="java.sql.*"%>
 
+
+<h2>Commande à livrer</h2>
+
 <%  ResultSet res = (ResultSet)request.getAttribute("livraisonCommande"); %>
 	
 

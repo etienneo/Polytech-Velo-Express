@@ -37,7 +37,7 @@
 	<% while(res.next())
 	   { %>
 		<tr>
-			<td><%= res.getString("nom") %> </td> 
+			<td><strong><%= res.getString("nom") %> </strong></td> 
 			<td><%= res.getFloat("prix") %> </td> 
 			<td><%= res.getString("description") %> </td>
 			<td><%= res.getString("nomBoutique") %> </td>

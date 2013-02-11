@@ -32,6 +32,6 @@
 </table>
 
 <p>Coût total : <%= total %> euros<br/>
-<strong><a href="validerpanier" >Valider le panier</a></strong></p>
+<strong><a href="validerpanier"  class="button2">Valider le panier</a></strong></p>
 
 <%@ include file="page/footer.jspf" %>
