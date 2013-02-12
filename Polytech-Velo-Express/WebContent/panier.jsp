@@ -21,17 +21,17 @@
 	<% while(res.next())
 	   { %>
 		<tr>
-			<td><%= res.getString("nom") %></td>
-			<td><%= res.getInt("qte") %></td>
-			<td><%= res.getFloat("prix") %></td>
-			<td><%= res.getInt("qte") * res.getFloat("prix") %></td>
+			<td style="text-align:center;"><%= res.getString("nom") %></td>
+			<td style="text-align:center;"><%= res.getInt("qte") %></td>
+			<td style="text-align:center;"><%= res.getFloat("prix") %></td>
+			<td style="text-align:center;"><%= res.getInt("qte") * res.getFloat("prix") %></td>
 			<% total += res.getInt("qte") * res.getFloat("prix"); %>
 		</tr>
 	<% } %>
 
 </table>
 
-<p>Coût total : <%= total %> euros<br/>
+<p style="text-align:right;"><strong>Coût total : <%= total %> euros</strong><br/>
 <strong><a href="validerpanier"  class="button2">Valider le panier</a></strong></p>
 
 <%@ include file="page/footer.jspf" %>

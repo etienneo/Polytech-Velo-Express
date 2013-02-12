@@ -20,26 +20,31 @@ String nomBoutique = request.getParameter("nomBoutiqueInscription");
 
 if (login!=null && mdp!=null && nom!=null && prenom!=null && adresse!=null && cp!=null && ville!=null && mail!=null && tel!=null)
 {
-	if(request.getParameter("type") == null || request.getParameter("type") == "client" )
+	System.out.println(request.getParameter("type"));
+	
+	if(request.getParameter("type") == null || request.getParameter("type").equals("client"))
 	{
 		Utilisateur user = new Client(login, mdp, nom, prenom, adresse, ville, cp, mail, tel);
 		user.insert();
+		out.println("<p>Votre compte client a bien été créé.</p>");
 	}
-	else if (request.getParameter("type") == "livreur")
+	else if (request.getParameter("type").equals("livreur"))
 	{
 		Utilisateur user = new Livreur(login, mdp, nom, prenom, adresse, ville, cp, mail, tel, false);
 		user.insert();
+		out.println("<p>Votre compte livreur a bien été créé.</p>");
 	}
-	else if (request.getParameter("type") == "commercant")
+	else if (request.getParameter("type").equals("commercant"))
 	{
 		if(nomBoutique != null)
 		{
 			Utilisateur user = new Commercant(login, mdp, nom, prenom, adresse, ville, cp, mail, tel, nomBoutique);		
 			user.insert();
+			out.println("<p>Votre compte commercant a bien été créé.</p>");
 		}
 	}
-	
-	out.println("<p>Votre compte a bien été créé.</p>");
+	else	
+		out.println("<p>Une erreur est survenue.</p>");
 }
 else
 {
@@ -54,7 +59,7 @@ else
 		<label>Login : <input type="text" name="loginInscription" id="loginInscription" /></label>
 		<br/>
 		<br/>
-		<label>Mot de passe : <input type="text" name="mdpInscription" id="mdpInscription" /></label>
+		<label>Mot de passe : <input type="password" name="mdpInscription" id="mdpInscription" /></label>
 		<br/>
 		<br/>
 		<label>Nom : <input type="text" name="nomInscription" id="nomInscription" /></label>
@@ -84,14 +89,14 @@ else
 		<br/>
 		<% } %>
 		<% if(request.getParameter("type") != null) { %>
-		<input type="hidden" name="type" value="<%= request.getParameter("type") %>" />
+		<input type="hidden" name="type" id="type" value="<%= request.getParameter("type") %>" />
 		<% } %>
 		<input type="submit" value="Valider"/>
  		<input type="reset" name="reset" value="Annuler" >
 	</fieldset>
 </form>
 
-<script language="javascript">
+<script type="text/javascript">
 function verifierChamps()
  { 
 	if (trim(document.formulaireInscription.loginInscription.value)=="")

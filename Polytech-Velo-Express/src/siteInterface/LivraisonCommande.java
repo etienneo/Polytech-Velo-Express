@@ -38,7 +38,7 @@ public class LivraisonCommande extends HttpServlet
 			
 			MySQLManager mysql = MySQLManager.getMySQLManager();
 
-			ResultSet res = mysql.execRequest("SELECT idCommande, produit.nom AS nomProduit, " +
+			ResultSet res = mysql.execRequest("SELECT idCommande, coutCommande, coutCommande, produit.nom AS nomProduit, " +
 					"referenceProduit, commandeContientProduit.quantite AS quantite, utilisateur.nom AS nomClient, " +
 					"prenom, adresse, ville, codePostal, tel, nomBoutique " +
 					"FROM (commande NATURAL JOIN " +

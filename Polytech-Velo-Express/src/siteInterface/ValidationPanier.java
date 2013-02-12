@@ -15,7 +15,6 @@ import modele.MySQLManager;
 import modele.Produit;
 import modele.SessionManager;
 import modele.utilisateurs.Client;
-import modele.utilisateurs.Commercant;
 import modele.utilisateurs.TypeUtilisateur;
 
 public class ValidationPanier extends HttpServlet {

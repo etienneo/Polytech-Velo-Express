@@ -1,11 +1,9 @@
 <%@ include file="page/header.jspf" %>
 <%@page import="java.sql.*"%>
 
-
 <h2>Commande à livrer</h2>
 
 <%  ResultSet res = (ResultSet)request.getAttribute("livraisonCommande"); %>
-	
 
 <%
    		int cmdPrec = 0;
@@ -20,6 +18,7 @@
 				<strong><%= res.getString("adresse") %></strong><br/>
 				<strong><%= res.getString("codePostal") %></strong> <strong><%= res.getString("ville") %></strong><br/>
 				Téléphone : <strong><%= res.getString("tel") %></strong><br/>
+				Valeur de la commande : <strong><%= res.getInt("coutCommande") %> euros</strong>
 			</p>
 			<h4>Produits</h4>
 			<% } %>
@@ -31,8 +30,5 @@
 			
    			<% cmdPrec = res.getInt("idCommande"); %>
 	 <% } %>
-	
-
-
 
 <%@ include file="page/footer.jspf" %>
